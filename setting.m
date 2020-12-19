@@ -1,5 +1,6 @@
 clear
-Config.Filename.stimulus = '';
+addpath("function");
+%%
 Config.Filename.output = 'output\';
 Config.Notice.address = '';
 Config.Monitor.screenNumber = 1;

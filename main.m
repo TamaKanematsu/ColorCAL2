@@ -1,17 +1,17 @@
 setting;
 
-%% read stimulus file
-% [Config, Stimulus] = readStimulus(Config);
-    eeadfadfdf  tetstd
 try
     %% connect ColorCAL2
-    CAL = openColorCAL2();
+%     CAL = openColorCAL2();
     
     %% read monitor information
     Monitor = readMonitorInfo(Config.Monitor.screenNumber, Config);
 
+    %% read stimulus file
+    [Config, Stimulus] = readStimulus(Config, Monitor);
+    
     %% zero calibration 
-    calibColorCAL2(Monitor); 
+%     calibColorCAL2(Monitor); 
     
     %% display measurement
 

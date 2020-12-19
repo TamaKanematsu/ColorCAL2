@@ -18,7 +18,7 @@ function calibColorCAL2(Monitor)
     ColorCal2('ZeroCalibration');
     
     Screen('FillRect', Monitor.winPtr, backColor);
-    DrawFormattedText(Monitor.winPtr, 'Completed !! Remove the cover.\n\n''Space'' to continue....', 'center', 'center', strColor);
+    DrawFormattedText(Monitor.winPtr, 'Completed !!\nRemove the cover.\n\n''Space'' to continue....', 'center', 'center', strColor);
     Screen('Flip', Monitor.winPtr);
     KbWait;
     
