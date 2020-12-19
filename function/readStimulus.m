@@ -1,9 +1,9 @@
 function [Config, Stimulus] = readStimulus(Config, Monitor)
     
-%     [file, path] = uigetfile('*.mat');
-%     Config.Filename.stimulus = [path, file];
-%     Stimulus = load([path, file]);
-    Stimulus = load('stimulus.mat');
+    [file, path] = uigetfile('*.mat');
+    Config.Filename.stimulus = [path, file];
+    Stimulus = load([path, file]);
+%     Stimulus = load('stimulus.mat');
     fields = fieldnames(Stimulus);
     input_stimulus = getfield(Stimulus, fields{1});
     
@@ -30,7 +30,7 @@ function [Config, Stimulus] = readStimulus(Config, Monitor)
         disp('offset_time error');
     end
     
-    if checkValue(start_measure_time, 0, offset_time)
+    if checkValue(start_measure_time, onset_time, offset_time)
         disp('start_measure_time error');
     end
     %%
@@ -40,8 +40,11 @@ function [Config, Stimulus] = readStimulus(Config, Monitor)
     if sum(flags) > 0
         disp('rect error');
     end
+    
     %%
     Stimulus.input_stimulus = input_stimulus;
+    Stimulus.stmlNum = length(input_stimulus);
+    
 end
 
 function flag = checkValue(data, minVal, maxVal)

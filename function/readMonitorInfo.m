@@ -5,9 +5,11 @@ function Monitor = readMonitorInfo(screenNumber, Config)
     
     initializeMonitor(Config);
     
-    winPtr = Screen('OpenWindow', screenNumber, 0, rect);
+    winPtr = Screen('OpenWindow', screenNumber, 0);
     ifi = Screen('GetFlipInterval', winPtr);
+    Screen('CloseAll');
     
+    Monitor.screenNumber = screenNumber;
     Monitor.winPtr = winPtr;
     Monitor.Size.width = width;
     Monitor.Size.height= height;
