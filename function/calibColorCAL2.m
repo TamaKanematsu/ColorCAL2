@@ -6,6 +6,7 @@ function calibColorCAL2(Monitor)
 
     myKeyCheck;
     
+    Monitor.winPtr = Screen('OpenWindow', Monitor.screenNumber, 0);
     Screen('FillRect', Monitor.winPtr, backColor);
     DrawFormattedText(Monitor.winPtr, 'Put the cover for the zero calibration.\n\n''Space'' to continue....', 'center', 'center', strColor);
     Screen('Flip', Monitor.winPtr);
@@ -18,9 +19,10 @@ function calibColorCAL2(Monitor)
     ColorCal2('ZeroCalibration');
     
     Screen('FillRect', Monitor.winPtr, backColor);
-    DrawFormattedText(Monitor.winPtr, 'Completed !! Remove the cover.\n\n''Space'' to continue....', 'center', 'center', strColor);
+    DrawFormattedText(Monitor.winPtr, 'Completed !!\n''Space'' to continue....', 'center', 'center', strColor);
     Screen('Flip', Monitor.winPtr);
     KbWait;
     
+    Screen('CloseAll')
     ListenChar(0);
 end
