@@ -15,4 +15,4 @@ Config.Monitor.skipTest = 0;
 %       https://qiita.com/vmmhypervisor/items/18c99624a84df8b31008
 %   2. rewrite "Config.Notice.Webhook.url" for your url
 
-% Config.Notice.Webhook.url = 'https://hooks.slack.com/services/EXAMPLEEEEE';
+% Config.Notice.Webhook.url = 'https://hooks.slack.com/services/EXAMPLEEEE';

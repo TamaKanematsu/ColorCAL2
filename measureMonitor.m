@@ -1,8 +1,8 @@
 function Output = measureMonitor(Monitor, Stimulus, Config)
     ListenChar(2);
-    myKeyCheck;
     stimuli = Stimulus.input_stimulus;
     cMatrix = ColorCal2('ReadColorMatrix');
+  
     %% open full screen
     initializeMonitor(Config);
     Monitor.winPtr = Screen('OpenWindow', Monitor.screenNumber, 0, [0 0 Monitor.Size.width Monitor.Size.height]);
@@ -13,6 +13,8 @@ function Output = measureMonitor(Monitor, Stimulus, Config)
     %% measuring stimulus set
     flipTime = 0;
     try
+        Output.measureNum = 0;
+        
         for i = 1:Stimulus.stmlNum
             S = stimuli(i);
             blank_duration(i) = S.onset_time;
@@ -31,17 +33,19 @@ function Output = measureMonitor(Monitor, Stimulus, Config)
             XYZ(i) = ColorCal2('MeasureXYZ');
             %
             flipTime = StimulusOnsetTime(i) + stimulus_duration(i);
+            Output.measureNu = Output.measureNu + 1;
+            disp([num2str(Output.measureNu), '/', num2str(Stimulus.stmlNum)]);
         end
         [BlankTimeStamp(i+1), BlankOnsetTime(i+1)] = createBlankScreen(Monitor.winPtr, S.blankRGB, flipTime);
         Screen('CloseAll');
     catch
         Screen('CloseAll');
     end
-    Output.measureNum = i;
     
     %% datas from the measuring
     output = stimuli;
     for i= 1:Output.measureNum
+        output(i).order = i;
         output(i).SettingBlankDuration = blank_duration(i);
         output(i).SettingStimulusDuration = stimulus_duration(i);
         output(i).SettingMeasureStartTime = measure_time_from_onset(i);

@@ -11,7 +11,7 @@ function calibColorCAL2(Monitor, Config)
     % open screen
     initializeMonitor(Config);
     try
-        ListenChar(2);
+%         ListenChar(2);
         Monitor.winPtr = Screen('OpenWindow', Monitor.screenNumber, 0);
     catch
         ListenChar(0);
@@ -33,7 +33,7 @@ function calibColorCAL2(Monitor, Config)
             Screen('Flip', Monitor.winPtr);
 
             try
-                ColorCal2('ZeroCalibration');
+%                 ColorCal2('ZeroCalibration');
                 WaitSecs(1);
             catch
                 Screen('CloseAll')
@@ -43,12 +43,14 @@ function calibColorCAL2(Monitor, Config)
             Screen('Flip', Monitor.winPtr);
             WaitSecs(1);
             
-            % next screen
             DrawFormattedText(Monitor.winPtr, 'Completed !!', 'center', center(2)-50, strColor);
+        elseif flag_key(2)
+            break;
         end
         
         targetKey = [space_key, return_key];
-        DrawFormattedText(Monitor.winPtr, '''Escape'' to end Zero calibration\n\n''Space'' to start Zero calibration', 'center', center(2)+50, strColor);
+%         Screen('DrawText')
+        DrawFormattedText(Monitor.winPtr, '''Escape'' to end Zero calibration\n\n''Space'' to start Zero calibration', 'center', center(2)+200, strColor);
         Screen('Flip', Monitor.winPtr);
         flag_key = waitKeys(targetKey);
         
@@ -56,4 +58,16 @@ function calibColorCAL2(Monitor, Config)
     Screen('CloseAll')
     ListenChar(0);
 end
+%% ----- function -----
 
+function flag_key = waitKeys(targetKey)
+    while(1)
+        [  ~, keyCode ] = KbWait(0, 3);
+        if sum(keyCode(targetKey))
+            break;
+        end
+
+    end
+    
+    flag_key = keyCode(targetKey);
+end
