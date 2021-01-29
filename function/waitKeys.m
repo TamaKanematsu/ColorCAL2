@@ -1,6 +1,11 @@
 function flag_key = waitKeys(targetKey)
+cc=0;
+
     while(1)
-        [  ~, keyCode ] = KbWait(0, 3);
+        cc=cc+1;
+        disp(cc);
+        [  ~, keyCode ] = KbWait([], 3);
+        
         if sum(keyCode(targetKey))
             break;
         end

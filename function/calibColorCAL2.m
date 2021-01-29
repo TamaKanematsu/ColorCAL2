@@ -18,6 +18,7 @@ function calibColorCAL2(Monitor, Config)
     end
 
     % calibration
+    cc=0;
     while(1)
         if flag_key(2)
             break;
@@ -33,7 +34,8 @@ function calibColorCAL2(Monitor, Config)
             Screen('Flip', Monitor.winPtr);
 
             try
-                ColorCal2('ZeroCalibration');
+                flag = ColorCal2('ZeroCalibration');
+                disp(flag);
                 WaitSecs(1);
             catch
                 Screen('CloseAll')
@@ -48,9 +50,13 @@ function calibColorCAL2(Monitor, Config)
         end
         
         targetKey = [space_key, return_key];
+        message = '''Escape'' to end Zero calibration\n\n''Space'' to start Zero calibration';
         DrawFormattedText(Monitor.winPtr, '''Escape'' to end Zero calibration\n\n''Space'' to start Zero calibration', 'center', center(2)+50, strColor);
         Screen('Flip', Monitor.winPtr);
+        disp(message);
         flag_key = waitKeys(targetKey);
+        cc=cc+1;
+        disp(cc);
         
     end
     Screen('CloseAll')

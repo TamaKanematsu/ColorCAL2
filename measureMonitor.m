@@ -33,8 +33,8 @@ function Output = measureMonitor(Monitor, Stimulus, Config)
             XYZ(i) = ColorCal2('MeasureXYZ');
             %
             flipTime = StimulusOnsetTime(i) + stimulus_duration(i);
-            Output.measureNu = Output.measureNu + 1;
-            disp([num2str(Output.measureNu), '/', num2str(Stimulus.stmlNum)]);
+            Output.measureNum = Output.measureNum + 1;
+            disp([num2str(Output.measureNum), '/', num2str(Stimulus.stmlNum)]);
         end
         [BlankTimeStamp(i+1), BlankOnsetTime(i+1)] = createBlankScreen(Monitor.winPtr, S.blankRGB, flipTime);
         Screen('CloseAll');
@@ -90,8 +90,10 @@ function createCrossScreen(winPtr, stimulus_rect, monitor_size)
     Screen('FillRect', winPtr, backRGB);
     Screen('DrawLine', winPtr ,crossRGB, 0, line_center(2), monitor_size.width, line_center(2)); % vertival line
     Screen('DrawLine', winPtr ,crossRGB, line_center(1), 0, line_center(1), monitor_size.height); % horizontal line
+    message = '1. Remove the cover\n2. Place ColorCAL2 in front of the cross\n\nPress any key to start the measuring';
     DrawFormattedText(winPtr, '1. Remove the cover\n2. Place ColorCAL2 in front of the cross\n\nPress any key to start the measuring', 'center', 'center', strRGB);
     [VBLTimeStamp, StimulusOnsetTime] = Screen('Flip', winPtr);
+    disp(message);
     KbWait;
     
     WaitSecs(0.2);
